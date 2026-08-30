@@ -398,6 +398,35 @@
             color: #f39c12;
         }
 
+        /* Admin panel */
+        .admin-panel {
+            background: #0d1f36;
+            border-radius: 20px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid #1f3a57;
+        }
+        .admin-panel .admin-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 12px;
+        }
+        .admin-panel .admin-grid button {
+            background: transparent;
+            border: 1px solid #f39c12;
+            color: #f39c12;
+            padding: 4px 16px;
+            border-radius: 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .admin-panel .admin-grid button:hover {
+            background: #f39c12;
+            color: #0b1a2f;
+        }
+
         @media (max-width: 900px) {
             .navbar {
                 flex-direction: column;
@@ -467,10 +496,12 @@
                 <button onclick="performSearch()"><i class="fas fa-arrow-right"></i> SEARCH</button>
             </div>
             <div style="margin-top:14px; display:flex; gap:16px; flex-wrap:wrap; font-size:0.85rem; color:#9bb4cc;">
-                <span><i class="fas fa-tag"></i> ATR 72</span>
-                <span><i class="fas fa-tag"></i> ATA 32</span>
-                <span><i class="fas fa-tag"></i> Landing Gear</span>
-                <span><i class="fas fa-tag"></i> AMM</span>
+                <span><i class="fas fa-tag"></i> ATR 42_72</span>
+                <span><i class="fas fa-tag"></i> BOEING 737</span>
+                <span><i class="fas fa-tag"></i> CESSNA 172_182</span>
+                <span><i class="fas fa-tag"></i> PILATUS MARK 1_2</span>
+                <span><i class="fas fa-tag"></i> ROBINSON R22</span>
+                <span><i class="fas fa-tag"></i> SIKORSKY S76</span>
             </div>
         </div>
     </section>
@@ -504,6 +535,18 @@
             </div>
         </div>
 
+        <!-- ADMIN PANEL -->
+        <div class="admin-panel">
+            <h4 style="color:#f39c12; margin-bottom:8px;"><i class="fas fa-user-cog"></i> Admin Panel</h4>
+            <p style="font-size:0.85rem; color:#8aaac0; margin-bottom:12px;">Add new manuals by editing the <code>manuals.json</code> file or use the config below.</p>
+            <div class="admin-grid">
+                <button onclick="showAddManualGuide()"><i class="fas fa-plus"></i> Add Manual</button>
+                <button onclick="window.open('https://drive.google.com', '_blank')"><i class="fas fa-folder-open"></i> Open Drive</button>
+                <button onclick="location.reload()"><i class="fas fa-sync"></i> Refresh Library</button>
+                <button onclick="showHelp()"><i class="fas fa-question-circle"></i> Help</button>
+            </div>
+        </div>
+
         <!-- FOOTER -->
         <div class="watermark-notice" style="margin:20px 0 40px;">
             <i class="fas fa-shield-alt"></i> AMT DIGITAL TECHNICAL LIBRARY — "Find. Access. Maintain." • All manuals for educational use only.
@@ -512,113 +555,42 @@
 
     <script>
         // ============================================================
-        // DATA: Your manuals loaded from manuals.json (or inline)
+        // YOUR DRIVE STRUCTURE - Copy your folder names here
         // ============================================================
 
-        // Option 1: Load from external JSON file (recommended)
-        // fetch('manuals.json')
-        //   .then(res => res.json())
-        //   .then(data => initLibrary(data))
-        //   .catch(err => console.error('Error loading manuals:', err));
-
-        // Option 2: Inline data (for quick testing)
-        const libraryData = {
-            "folders": {
-                "ATR 72-600": {
-                    "manufacturer": "ATR",
-                    "manuals": {
-                        "AMM": [{
-                            "filename": "ATA32-LandingGear.pdf",
-                            "ata": "32",
-                            "title": "Landing Gear",
-                            "previewUrl": "https://drive.google.com/file/d/1ABC123xyz/preview",
-                            "revision": "Rev 15"
-                        }, {
-                            "filename": "ATA21-AirConditioning.pdf",
-                            "ata": "21",
-                            "title": "Air Conditioning",
-                            "previewUrl": "https://drive.google.com/file/d/2DEF456uvw/preview",
-                            "revision": "Rev 12"
-                        }, {
-                            "filename": "ATA27-FlightControls.pdf",
-                            "ata": "27",
-                            "title": "Flight Controls",
-                            "previewUrl": "https://drive.google.com/file/d/3GHI789xyz/preview",
-                            "revision": "Rev 9"
-                        }]
-                    }
-                },
-                "Sikorsky S76": {
-                    "manufacturer": "Sikorsky",
-                    "manuals": {
-                        "AMM": [{
-                            "filename": "ATA29-Hydraulic.pdf",
-                            "ata": "29",
-                            "title": "Hydraulic Power",
-                            "previewUrl": "https://drive.google.com/file/d/4JKL012abc/preview",
-                            "revision": "Rev 5"
-                        }]
-                    }
-                },
-                "Pilatus Mark 1-2": {
-                    "manufacturer": "Pilatus",
-                    "manuals": {
-                        "AMM": [{
-                            "filename": "ATA28-Fuel.pdf",
-                            "ata": "28",
-                            "title": "Fuel",
-                            "previewUrl": "https://drive.google.com/file/d/5MNO345def/preview",
-                            "revision": "Rev 3"
-                        }]
-                    }
-                },
-                "Cessna 172": {
-                    "manufacturer": "Cessna",
-                    "manuals": {
-                        "AMM": [{
-                            "filename": "ATA32-LandingGear.pdf",
-                            "ata": "32",
-                            "title": "Landing Gear",
-                            "previewUrl": "https://drive.google.com/file/d/6PQR678ghi/preview",
-                            "revision": "Rev 10"
-                        }]
-                    }
-                },
-                "Robinson R22": {
-                    "manufacturer": "Robinson",
-                    "manuals": {
-                        "AMM": [{
-                            "filename": "ATA05-TimeLimits.pdf",
-                            "ata": "05",
-                            "title": "Time Limits",
-                            "previewUrl": "https://drive.google.com/file/d/7STU901jkl/preview",
-                            "revision": "Rev 7"
-                        }]
-                    }
+        const DRIVE_FOLDERS = {
+            "ATR 42_72": {
+                "manufacturer": "ATR",
+                "manuals": {
+                    // Example: "AMM": [{ "ata": "32", "title": "Landing Gear", "previewUrl": "https://drive.google.com/file/d/ID/preview", "revision": "Rev 15" }]
                 }
+            },
+            "BOEING 737": {
+                "manufacturer": "Boeing",
+                "manuals": {}
+            },
+            "CESSNA 172_182": {
+                "manufacturer": "Cessna",
+                "manuals": {}
+            },
+            "PILATUS MARK 1_2": {
+                "manufacturer": "Pilatus",
+                "manuals": {}
+            },
+            "ROBINSON R22": {
+                "manufacturer": "Robinson",
+                "manuals": {}
+            },
+            "SIKORSKY S76": {
+                "manufacturer": "Sikorsky",
+                "manuals": {}
             }
         };
 
-        // Manual type icons mapping
-        const TYPE_ICONS = {
-            'AMM': 'fa-plane',
-            'MM': 'fa-wrench',
-            'WDM': 'fa-bolt',
-            'SRM': 'fa-ruler-combined',
-            'TSM': 'fa-screwdriver',
-            'SPM': 'fa-clipboard-list'
-        };
+        // ============================================================
+        // ATA TITLES
+        // ============================================================
 
-        const TYPE_NAMES = {
-            'AMM': 'Aircraft Maintenance Manual',
-            'MM': 'Maintenance Manual',
-            'WDM': 'Wiring Diagram Manual',
-            'SRM': 'Structural Repair Manual',
-            'TSM': 'Troubleshooting Manual',
-            'SPM': 'Standard Practices Manual'
-        };
-
-        // ATA Titles mapping
         const ATA_TITLES = {
             '00': 'GENERAL',
             '05': 'TIME LIMITS / MAINTENANCE CHECKS',
@@ -651,15 +623,33 @@
             '71': 'POWER PLANT'
         };
 
+        const TYPE_ICONS = {
+            'AMM': 'fa-plane',
+            'MM': 'fa-wrench',
+            'WDM': 'fa-bolt',
+            'SRM': 'fa-ruler-combined',
+            'TSM': 'fa-screwdriver',
+            'SPM': 'fa-clipboard-list'
+        };
+
+        const TYPE_NAMES = {
+            'AMM': 'Aircraft Maintenance Manual',
+            'MM': 'Maintenance Manual',
+            'WDM': 'Wiring Diagram Manual',
+            'SRM': 'Structural Repair Manual',
+            'TSM': 'Troubleshooting Manual',
+            'SPM': 'Standard Practices Manual'
+        };
+
         // ============================================================
-        // BUILD MASTER MANUAL LIST FROM DATA
+        // BUILD MASTER LIST
         // ============================================================
 
         let allManuals = [];
 
-        function buildManualsFromData(data) {
+        function buildManualsFromDrive() {
             allManuals = [];
-            for (const [aircraft, aircraftData] of Object.entries(data.folders)) {
+            for (const [aircraft, aircraftData] of Object.entries(DRIVE_FOLDERS)) {
                 for (const [manualType, files] of Object.entries(aircraftData.manuals)) {
                     for (const file of files) {
                         allManuals.push({
@@ -672,7 +662,7 @@
                             ataTitle: ATA_TITLES[file.ata] || 'UNKNOWN',
                             revision: file.revision || 'Rev 1',
                             googleDrivePreviewUrl: file.previewUrl,
-                            fileName: file.filename,
+                            fileName: file.filename || `ATA${file.ata}-${file.title}.pdf`,
                             status: 'available',
                             keywords: [file.ata, file.title, aircraft, manualType, ATA_TITLES[file.ata] || ''].map(s => s
                                 .toLowerCase())
@@ -695,10 +685,10 @@
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.innerHTML = `
-                    <i class="fas ${TYPE_ICONS[t] || 'fa-file'}"></i>
-                    <h4>${TYPE_NAMES[t] || t}</h4>
-                    <span class="badge">${count} docs</span>
-                `;
+                            <i class="fas ${TYPE_ICONS[t] || 'fa-file'}"></i>
+                            <h4>${TYPE_NAMES[t] || t}</h4>
+                            <span class="badge">${count} docs</span>
+                        `;
                 card.addEventListener('click', () => performSearch(t));
                 grid.appendChild(card);
             });
@@ -712,23 +702,47 @@
                 if (!aircraftMap.has(m.aircraft)) aircraftMap.set(m.aircraft, new Set());
                 aircraftMap.get(m.aircraft).add(m.manualType);
             });
+
+            if (allManuals.length === 0) {
+                for (const [aircraft, data] of Object.entries(DRIVE_FOLDERS)) {
+                    const card = document.createElement('div');
+                    card.className = 'aircraft-card';
+                    const isHelicopter = aircraft.includes('Sikorsky') || aircraft.includes('Robinson');
+                    const icon = isHelicopter ? 'fa-helicopter' : 'fa-plane';
+                    card.innerHTML = `
+                                <div class="top">
+                                    <i class="fas ${icon}"></i>
+                                    <div class="info">
+                                        <h4>${aircraft}</h4>
+                                        <small>${data.manufacturer || aircraft.split(' ')[0]}</small>
+                                    </div>
+                                </div>
+                                <div class="meta">
+                                    <span style="color:#8aaac0;">No manuals added yet</span>
+                                </div>
+                                <div class="btn-sm" style="opacity:0.5;cursor:default;">ADD MANUALS</div>
+                            `;
+                    grid.appendChild(card);
+                }
+                return;
+            }
+
             for (const [aircraft, types] of aircraftMap) {
                 const card = document.createElement('div');
                 card.className = 'aircraft-card';
-                const isHelicopter = aircraft.includes('Sikorsky') || aircraft.includes('Robinson') || aircraft.includes(
-                'Helicopter');
+                const isHelicopter = aircraft.includes('Sikorsky') || aircraft.includes('Robinson');
                 const icon = isHelicopter ? 'fa-helicopter' : 'fa-plane';
                 card.innerHTML = `
-                    <div class="top">
-                        <i class="fas ${icon}"></i>
-                        <div class="info">
-                            <h4>${aircraft}</h4>
-                            <small>${aircraft.split(' ')[0]}</small>
-                        </div>
-                    </div>
-                    <div class="meta">${Array.from(types).map(t => `<span>${t}</span>`).join('')}</div>
-                    <div class="btn-sm" data-aircraft="${aircraft}">VIEW DOCUMENTATION</div>
-                `;
+                            <div class="top">
+                                <i class="fas ${icon}"></i>
+                                <div class="info">
+                                    <h4>${aircraft}</h4>
+                                    <small>${aircraft.split(' ')[0]}</small>
+                                </div>
+                            </div>
+                            <div class="meta">${Array.from(types).map(t => `<span>${t}</span>`).join('')}</div>
+                            <div class="btn-sm" data-aircraft="${aircraft}">VIEW DOCUMENTATION</div>
+                        `;
                 card.querySelector('.btn-sm').addEventListener('click', (e) => {
                     performSearch(e.target.dataset.aircraft);
                 });
@@ -750,7 +764,8 @@
             for (const [ata, { title, count }] of sorted) {
                 const div = document.createElement('div');
                 div.className = 'ata-item';
-                div.innerHTML = `<strong>ATA ${ata}</strong> ${title} <span style="color:#8aaac0;font-size:0.7rem;">(${count})</span>`;
+                div.innerHTML =
+                    `<strong>ATA ${ata}</strong> ${title} <span style="color:#8aaac0;font-size:0.7rem;">(${count})</span>`;
                 div.addEventListener('click', () => performSearch(`ATA ${ata}`));
                 grid.appendChild(div);
             }
@@ -792,31 +807,124 @@
                 const div = document.createElement('div');
                 div.className = 'result-card';
                 div.innerHTML = `
-                    <div class="doc-info">
-                        <h4>${m.aircraft} · ATA ${m.ataChapter} – ${m.ataTitle}</h4>
-                        <p><i class="fas fa-book"></i> ${m.manualTitle} <span style="color:#8aaac0; margin-left:12px;">${m.manualType}-${m.ataChapter}</span></p>
-                        <span class="status"><i class="fas fa-check-circle"></i> ${m.status.toUpperCase()}</span>
-                    </div>
-                    <div class="doc-meta">
-                        <span style="background:#1f3a57; padding:2px 12px; border-radius:30px;">${m.revision}</span>
-                        <div class="actions">
-                            <button class="open-btn" data-id="${m.id}"><i class="fas fa-eye"></i> OPEN MANUAL</button>
-                            <button><i class="fas fa-star"></i> FAV</button>
-                            <button><i class="fas fa-info-circle"></i> DETAILS</button>
-                        </div>
-                    </div>
-                `;
+                            <div class="doc-info">
+                                <h4>${m.aircraft} · ATA ${m.ataChapter} – ${m.ataTitle}</h4>
+                                <p><i class="fas fa-book"></i> ${m.manualTitle} <span style="color:#8aaac0; margin-left:12px;">${m.manualType}-${m.ataChapter}</span></p>
+                                <span class="status"><i class="fas fa-check-circle"></i> ${m.status.toUpperCase()}</span>
+                            </div>
+                            <div class="doc-meta">
+                                <span style="background:#1f3a57; padding:2px 12px; border-radius:30px;">${m.revision}</span>
+                                <div class="actions">
+                                    <button class="open-btn" data-id="${m.id}"><i class="fas fa-eye"></i> OPEN MANUAL</button>
+                                    <button><i class="fas fa-star"></i> FAV</button>
+                                    <button><i class="fas fa-info-circle"></i> DETAILS</button>
+                                </div>
+                            </div>
+                        `;
                 div.querySelector('.open-btn').addEventListener('click', () => openManual(m));
                 list.appendChild(div);
             });
         }
 
         // ============================================================
-        // OPEN MANUAL (Load Viewer)
+        // OPEN MANUAL
         // ============================================================
 
         function openManual(manual) {
             const viewer = document.getElementById('viewerPlaceholder');
             viewer.innerHTML = `
-                <iframe src="${manual.googleDrivePreviewUrl}" allowfullscreen></iframe>
-                <div style="position:absolute; top:20%; left:10
+                        <iframe src="${manual.googleDrivePreviewUrl}" allowfullscreen></iframe>
+                        <div style="position:absolute; top:20%; left:10%; right:10%; color:#f39c12; opacity:0.15; font-size:2.5rem; font-weight:700; pointer-events:none; transform:rotate(-12deg); text-align:center; letter-spacing:4px; text-shadow:0 0 10px #000;">
+                            AMT DIGITAL LIBRARY<br><span style="font-size:1.2rem;">STUDENT ACCESS ONLY</span>
+                        </div>
+                        <div style="position:absolute; bottom:20%; right:10%; color:#f39c12; opacity:0.15; font-size:1.2rem; font-weight:600; pointer-events:none;">
+                            ${new Date().toLocaleDateString()} · ${new Date().toLocaleTimeString()}
+                        </div>
+                    `;
+            viewer.style.minHeight = '400px';
+            viewer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // ============================================================
+        // HELP FUNCTIONS
+        // ============================================================
+
+        function showAddManualGuide() {
+            const guide = `
+        📘 HOW TO ADD A MANUAL (3 Steps)
+
+        STEP 1: Upload PDF to Google Drive
+        - Go to drive.google.com
+        - Create folder: AIRCRAFT_NAME/MANUAL_TYPE/
+          Example: ATR 42_72/AMM/
+        - Upload your PDF
+
+        STEP 2: Get the preview link
+        - Open the PDF in Drive
+        - Click Share → "Anyone with the link"
+        - Copy the link: https://drive.google.com/file/d/FILE_ID/view
+        - Change /view to /preview
+
+        STEP 3: Add to the code
+        - Open index.html
+        - Find DRIVE_FOLDERS
+        - Add this inside the correct aircraft:
+          "AMM": [
+              { "ata": "32", "title": "Landing Gear", "previewUrl": "YOUR_PREVIEW_URL", "revision": "Rev 15" }
+          ]
+
+        That's it! Refresh the page.
+        `;
+            alert(guide);
+        }
+
+        function showHelp() {
+            const help = `
+        🛩️ AMT DIGITAL LIBRARY - Quick Help
+
+        SEARCH:
+        - Type aircraft name (e.g., "ATR")
+        - Type ATA number (e.g., "32")
+        - Type manual type (e.g., "AMM")
+        - Type system name (e.g., "Landing Gear")
+
+        VIEW MANUAL:
+        - Click any search result
+        - Click "OPEN MANUAL" button
+        - Document opens in viewer
+
+        ADD MANUALS:
+        - Click "Add Manual" button in Admin Panel
+        - Follow the 3-step guide
+
+        TIPS:
+        - Use exact ATA numbers (00-99)
+        - Include revision numbers
+        - Keep filenames organized
+
+        For more help, visit the GitHub repository.
+        `;
+            alert(help);
+        }
+
+        // ============================================================
+        // INITIALIZE
+        // ============================================================
+
+        // Try loading from manuals.json first
+        fetch('manuals.json')
+            .then(response => {
+                if (!response.ok) throw new Error('No manuals.json found');
+                return response.json();
+            })
+            .then(data => {
+                // Merge with DRIVE_FOLDERS
+                for (const [aircraft, aircraftData] of Object.entries(data.folders || {})) {
+                    if (DRIVE_FOLDERS[aircraft]) {
+                        DRIVE_FOLDERS[aircraft].manuals = aircraftData.manuals || {};
+                    }
+                }
+                buildManualsFromDrive();
+                renderAll();
+            })
+            .
