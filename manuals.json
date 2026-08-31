@@ -1,0 +1,60 @@
+{
+  "folders": {
+    "ATR 42_72": {
+      "manufacturer": "ATR",
+      "manuals": {
+        "AMM": [
+          {
+            "ata": "32",
+            "title": "Landing Gear",
+            "previewUrl": "https://drive.google.com/file/d/YOUR_FILE_ID_HERE/preview",
+            "revision": "Rev 15"
+          },
+          {
+            "ata": "21",
+            "title": "Air Conditioning",
+            "previewUrl": "https://drive.google.com/file/d/YOUR_FILE_ID_HERE/preview",
+            "revision": "Rev 12"
+          }
+        ],
+        "WDM": [
+          {
+            "ata": "24",
+            "title": "Electrical Power",
+            "previewUrl": "https://drive.google.com/file/d/YOUR_FILE_ID_HERE/preview",
+            "revision": "Rev 8"
+          }
+        ]
+      }
+    },
+    "BOEING 737": {
+      "manufacturer": "Boeing",
+      "manuals": {
+        "AMM": [
+          {
+            "ata": "32",
+            "title": "Landing Gear",
+            "previewUrl": "https://drive.google.com/file/d/YOUR_FILE_ID_HERE/preview",
+            "revision": "Rev 10"
+          }
+        ]
+      }
+    },
+    "CESSNA 172_182": {
+      "manufacturer": "Cessna",
+      "manuals": {}
+    },
+    "PILATUS MARK 1_2": {
+      "manufacturer": "Pilatus",
+      "manuals": {}
+    },
+    "ROBINSON R22": {
+      "manufacturer": "Robinson",
+      "manuals": {}
+    },
+    "SIKORSKY S76": {
+      "manufacturer": "Sikorsky",
+      "manuals": {}
+    }
+  }
+}
