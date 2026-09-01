@@ -459,12 +459,11 @@
             <h4 style="color:#f39c12; margin-bottom:8px;"><i class="fas fa-user-cog"></i> Admin Panel</h4>
             <p style="font-size:0.85rem; color:#8aaac0; margin-bottom:12px;">
                 <i class="fas fa-info-circle"></i> 
-                <strong>Google Drive Connected:</strong> All manuals are stored in your shared Drive folder.
-                Click any manual to open it directly in Drive.
+                <strong>Google Drive Connected:</strong> Each aircraft has its own folder. Click any manual to open its Drive folder.
             </p>
             <div class="admin-grid">
                 <button onclick="window.open('https://drive.google.com/drive/folders/1LSmoOV2YN4tyFwUEac0TZkIFOzaHRhXs?usp=drive_link', '_blank')">
-                    <i class="fas fa-folder-open"></i> Open Drive Library
+                    <i class="fas fa-folder-open"></i> Main Library
                 </button>
                 <button onclick="location.reload()"><i class="fas fa-sync"></i> Refresh</button>
                 <button onclick="showHelp()"><i class="fas fa-question-circle"></i> Help</button>
@@ -483,21 +482,24 @@
 
     <script>
         // ============================================================
-        // GOOGLE DRIVE CONFIGURATION - YOUR SHARED FOLDER LINK
+        // GOOGLE DRIVE CONFIGURATION - EACH AIRCRAFT HAS ITS OWN FOLDER
         // ============================================================
 
-        // This is your exact shared Drive folder link
-        const DRIVE_FOLDER_URL = "https://drive.google.com/drive/folders/1LSmoOV2YN4tyFwUEac0TZkIFOzaHRhXs?usp=drive_link";
+        // Map each aircraft to its specific Drive folder URL
+        const AIRCRAFT_DRIVE_LINKS = {
+            "ATR 42_72": "https://drive.google.com/drive/folders/1WWGOBXBJIW2x7CZCBgQUpnG5VYoixmLG?usp=sharing",
+            "BOEING 737": "https://drive.google.com/drive/folders/16GNjbc9GbBTjHKfweE9zm8sqqUPWpcI1?usp=sharing",
+            "CESSNA 172_182": "https://drive.google.com/drive/folders/1WPYcYPTEyWGnamAtGhNCI2BPfCxUayJN?usp=sharing",
+            "PILATUS MARK 1_2": "https://drive.google.com/drive/folders/1oyJrca_BeSbeNGoOE5X4kmTitEtHEQbn?usp=sharing",
+            "ROBINSON R22": "https://drive.google.com/drive/folders/1MjaxNu-14fBVo4GjspbZ180k9R30OBoE?usp=sharing",
+            "SIKORSKY S76": "https://drive.google.com/drive/folders/1TSMj8IQx_Pxx-rMb4UJjS2zxPNSMm42I?usp=sharing"
+        };
 
-        // Your aircraft folders (exactly as they appear in Drive)
-        const AIRCRAFT_FOLDERS = [
-            "ATR 42_72",
-            "BOEING 737",
-            "CESSNA 172_182",
-            "PILATUS MARK 1_2",
-            "ROBINSON R22",
-            "SIKORSKY S76"
-        ];
+        // Fallback: Main library folder (used for "Quick Access" and "Main Library" button)
+        const MAIN_DRIVE_URL = "https://drive.google.com/drive/folders/1LSmoOV2YN4tyFwUEac0TZkIFOzaHRhXs?usp=drive_link";
+
+        // List of aircraft (must match the keys in AIRCRAFT_DRIVE_LINKS)
+        const AIRCRAFT_FOLDERS = Object.keys(AIRCRAFT_DRIVE_LINKS);
 
         // Manual types (subfolders inside each aircraft)
         const MANUAL_TYPES = ['AMM', 'WDM', 'SRM', 'TSM', 'MM', 'SPM'];
@@ -543,20 +545,19 @@
         // ============================================================
 
         let allManuals = [];
-        let totalManualsCount = 0;
 
         function generateLibrary() {
             allManuals = [];
             const ataKeys = Object.keys(ATA_TITLES);
 
             AIRCRAFT_FOLDERS.forEach(aircraft => {
+                const driveUrl = AIRCRAFT_DRIVE_LINKS[aircraft] || MAIN_DRIVE_URL;
                 MANUAL_TYPES.forEach(manualType => {
-                    // Generate 3-5 ATA chapters per manual type (simulating what's in Drive)
+                    // Generate 3-5 ATA chapters per manual type
                     const count = 3 + Math.floor(Math.random() * 3);
                     for (let i = 0; i < count && i < ataKeys.length; i++) {
                         const ata = ataKeys[i];
                         const title = ATA_TITLES[ata] || 'UNKNOWN';
-                        const fileId = `FILE_${aircraft.replace(/ /g, '_')}_${manualType}_${ata}`;
                         allManuals.push({
                             id: `${aircraft}-${manualType}-${ata}`,
                             aircraft: aircraft,
@@ -565,12 +566,11 @@
                             manualTitle: manualType,
                             ataChapter: ata,
                             ataTitle: title,
-                            driveFolderUrl: DRIVE_FOLDER_URL, // All links point to your shared folder
+                            driveFolderUrl: driveUrl, // Each manual uses its aircraft's Drive link
                             fileName: `${manualType}-${ata}.pdf`,
                             status: 'available',
                             keywords: [ata, title, aircraft, manualType].map(s => s.toLowerCase())
                         });
-                        totalManualsCount++;
                     }
                 });
             });
@@ -605,7 +605,7 @@
                     <span class="badge">${count} docs</span>
                 `;
                 card.addEventListener('click', () => {
-                    window.open(DRIVE_FOLDER_URL, '_blank');
+                    window.open(MAIN_DRIVE_URL, '_blank');
                 });
                 grid.appendChild(card);
             });
@@ -621,6 +621,7 @@
             });
 
             for (const [aircraft, types] of aircraftMap) {
+                const driveUrl = AIRCRAFT_DRIVE_LINKS[aircraft] || MAIN_DRIVE_URL;
                 const card = document.createElement('div');
                 card.className = 'aircraft-card';
                 const isHelicopter = aircraft.includes('Sikorsky') || aircraft.includes('Robinson');
@@ -634,7 +635,7 @@
                         </div>
                     </div>
                     <div class="meta">${Array.from(types).map(t => `<span>${t}</span>`).join('')}</div>
-                    <button class="btn-sm" onclick="window.open('${DRIVE_FOLDER_URL}', '_blank')">
+                    <button class="btn-sm" onclick="window.open('${driveUrl}', '_blank')">
                         <i class="fas fa-folder-open"></i> OPEN IN DRIVE
                     </button>
                 `;
@@ -661,7 +662,7 @@
                     <span style="color:#8aaac0;font-size:0.7rem;">(${count})</span>
                 `;
                 div.addEventListener('click', () => {
-                    window.open(DRIVE_FOLDER_URL, '_blank');
+                    window.open(MAIN_DRIVE_URL, '_blank');
                 });
                 grid.appendChild(div);
             }
@@ -739,8 +740,12 @@
         // ============================================================
 
         function openInDrive(manualId) {
-            // All manuals open the same shared Drive folder
-            window.open(DRIVE_FOLDER_URL, '_blank');
+            const manual = allManuals.find(m => m.id === manualId);
+            if (manual) {
+                window.open(manual.driveFolderUrl, '_blank');
+            } else {
+                window.open(MAIN_DRIVE_URL, '_blank');
+            }
         }
 
         function showManualInfo(manualId) {
@@ -779,12 +784,11 @@
         • Search by manual type: "AMM", "WDM"
 
         GOOGLE DRIVE:
-        All manuals are stored in your shared Drive folder:
-        ${DRIVE_FOLDER_URL}
+        Each aircraft has its own folder. Click "OPEN IN DRIVE" to go directly to that aircraft's folder.
 
         ADDING MANUALS:
-        1. Go to your Drive folder
-        2. Create subfolders: AIRCRAFT/MANUAL_TYPE/
+        1. Go to the aircraft's Drive folder
+        2. Create subfolders: AMM/, WDM/, etc.
         3. Upload PDFs with ATA in filename
         4. Refresh this page
 
@@ -798,12 +802,10 @@
         // ============================================================
 
         document.addEventListener('keydown', function(e) {
-            // Ctrl+F or Cmd+F triggers search
             if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
                 e.preventDefault();
                 document.getElementById('globalSearch').focus();
             }
-            // Escape clears search and results
             if (e.key === 'Escape') {
                 document.getElementById('globalSearch').value = '';
                 document.getElementById('searchResultsArea').style.display = 'none';
@@ -819,24 +821,16 @@
         renderAircraft();
         renderATA();
 
-        // Make functions globally accessible
         window.performSearch = performSearch;
         window.openInDrive = openInDrive;
         window.showManualInfo = showManualInfo;
         window.showHelp = showHelp;
 
-        // Search on Enter key
         document.getElementById('globalSearch').addEventListener('keyup', (e) => {
             if (e.key === 'Enter') performSearch();
         });
 
-        // Disable right-click on the interface
         document.addEventListener('contextmenu', e => e.preventDefault());
 
         console.log('🛩️ AMT Digital Library initialized!');
-        console.log(`📁 Drive folder: ${DRIVE_FOLDER_URL}`);
-        console.log(`📚 Found ${allManuals.length} manuals across ${AIRCRAFT_FOLDERS.length} aircraft`);
-        console.log('💡 Click any manual to open it in Google Drive');
-    </script>
-</body>
-</html>
+        console.log
