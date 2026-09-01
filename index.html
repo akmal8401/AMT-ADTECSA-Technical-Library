@@ -7,19 +7,39 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* ============================================================
+           RESET & BASE
+           ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
             font-family: 'Inter', sans-serif;
             background: #0b1a2f;
             color: #e8edf2;
             line-height: 1.5;
         }
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #1a2d44; }
-        ::-webkit-scrollbar-thumb { background: #f39c12; border-radius: 8px; }
-        .container { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a2d44;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #f39c12;
+            border-radius: 8px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
 
-        /* NAV */
+        /* ============================================================
+           NAVIGATION
+           ============================================================ */
         .navbar {
             background: #0d1f36;
             padding: 12px 0;
@@ -29,10 +49,25 @@
             flex-wrap: wrap;
             justify-content: space-between;
         }
-        .nav-brand { display: flex; align-items: center; gap: 12px; }
-        .nav-brand i { font-size: 28px; color: #f39c12; }
-        .nav-brand h1 { font-size: 1.4rem; font-weight: 700; }
-        .nav-brand small { display: block; font-weight: 400; font-size: 0.7rem; color: #a0b8cc; }
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .nav-brand i {
+            font-size: 28px;
+            color: #f39c12;
+        }
+        .nav-brand h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+        .nav-brand small {
+            display: block;
+            font-weight: 400;
+            font-size: 0.7rem;
+            color: #a0b8cc;
+        }
         .nav-links {
             display: flex;
             gap: 24px;
@@ -45,6 +80,7 @@
             transition: 0.2s;
             padding: 6px 0;
             border-bottom: 2px solid transparent;
+            text-decoration: none;
         }
         .nav-links a:hover,
         .nav-links a.active {
@@ -82,31 +118,27 @@
             background: #f39c12;
             color: #0b1a2f;
         }
-        .btn-primary {
-            background: #f39c12;
-            border: none;
-            color: #0b1a2f;
-            padding: 10px 28px;
-            border-radius: 40px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .btn-primary:hover {
-            background: #e08e0b;
-            transform: scale(1.02);
-        }
 
-        /* HERO */
+        /* ============================================================
+           HERO SECTION
+           ============================================================ */
         .hero {
             padding: 60px 0 40px;
             background: linear-gradient(145deg, #0b1a2f 0%, #13273f 100%);
             border-bottom: 1px solid #1f3a57;
         }
-        .hero h2 { font-size: 2.8rem; font-weight: 700; }
-        .hero h2 span { color: #f39c12; }
-        .hero p { color: #b0c8dd; max-width: 600px; margin: 12px 0 24px; }
+        .hero h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+        }
+        .hero h2 span {
+            color: #f39c12;
+        }
+        .hero p {
+            color: #b0c8dd;
+            max-width: 600px;
+            margin: 12px 0 24px;
+        }
         .search-wrapper {
             background: #1a2f47;
             border-radius: 60px;
@@ -116,7 +148,11 @@
             max-width: 780px;
             border: 1px solid #2d4a68;
         }
-        .search-wrapper i { color: #f39c12; font-size: 1.2rem; margin-right: 10px; }
+        .search-wrapper i {
+            color: #f39c12;
+            font-size: 1.2rem;
+            margin-right: 10px;
+        }
         .search-wrapper input {
             background: transparent;
             border: none;
@@ -126,7 +162,9 @@
             font-size: 1rem;
             outline: none;
         }
-        .search-wrapper input::placeholder { color: #7f9bb5; }
+        .search-wrapper input::placeholder {
+            color: #7f9bb5;
+        }
         .search-wrapper button {
             background: #f39c12;
             border: none;
@@ -135,8 +173,31 @@
             font-weight: 700;
             color: #0b1a2f;
             cursor: pointer;
+            transition: 0.2s;
+        }
+        .search-wrapper button:hover {
+            background: #e08e0b;
         }
 
+        .tag-cloud {
+            margin-top: 14px;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            font-size: 0.85rem;
+            color: #9bb4cc;
+        }
+        .tag-cloud span {
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .tag-cloud span:hover {
+            color: #f39c12;
+        }
+
+        /* ============================================================
+           SECTION TITLES
+           ============================================================ */
         .section-title {
             font-size: 1.6rem;
             font-weight: 600;
@@ -145,9 +206,22 @@
             align-items: center;
             gap: 12px;
         }
-        .section-title i { color: #f39c12; }
+        .section-title i {
+            color: #f39c12;
+        }
+        .drive-badge {
+            display: inline-block;
+            background: #1a3a5a;
+            color: #f39c12;
+            padding: 4px 16px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            margin-left: 10px;
+        }
 
-        /* Cards */
+        /* ============================================================
+           QUICK ACCESS CARDS
+           ============================================================ */
         .card-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -167,8 +241,15 @@
             transform: translateY(-4px);
             background: #1a3450;
         }
-        .card i { font-size: 2.2rem; color: #f39c12; margin-bottom: 12px; }
-        .card h4 { font-size: 1.1rem; font-weight: 600; }
+        .card i {
+            font-size: 2.2rem;
+            color: #f39c12;
+            margin-bottom: 12px;
+        }
+        .card h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
         .card .badge {
             background: #1f3a57;
             display: inline-block;
@@ -179,7 +260,9 @@
             color: #bdd3e8;
         }
 
-        /* Aircraft */
+        /* ============================================================
+           AIRCRAFT CARDS
+           ============================================================ */
         .aircraft-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -193,12 +276,32 @@
             display: flex;
             flex-direction: column;
             border: 1px solid #1f3a57;
+            transition: 0.2s;
         }
-        .aircraft-card .top { display: flex; align-items: center; gap: 14px; }
-        .aircraft-card .top i { font-size: 2.4rem; color: #f39c12; }
-        .aircraft-card .info h4 { font-weight: 600; }
-        .aircraft-card .info small { color: #8aaac0; }
-        .aircraft-card .meta { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
+        .aircraft-card:hover {
+            border-color: #f39c12;
+        }
+        .aircraft-card .top {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .aircraft-card .top i {
+            font-size: 2.4rem;
+            color: #f39c12;
+        }
+        .aircraft-card .info h4 {
+            font-weight: 600;
+        }
+        .aircraft-card .info small {
+            color: #8aaac0;
+        }
+        .aircraft-card .meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin: 12px 0;
+        }
         .aircraft-card .meta span {
             background: #1f3a57;
             padding: 2px 12px;
@@ -223,7 +326,9 @@
             color: #0b1a2f;
         }
 
-        /* ATA */
+        /* ============================================================
+           ATA CHAPTERS
+           ============================================================ */
         .ata-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
@@ -239,10 +344,16 @@
             transition: 0.1s;
             cursor: pointer;
         }
-        .ata-item strong { color: #f39c12; }
-        .ata-item:hover { background: #1a3450; }
+        .ata-item strong {
+            color: #f39c12;
+        }
+        .ata-item:hover {
+            background: #1a3450;
+        }
 
-        /* Results */
+        /* ============================================================
+           SEARCH RESULTS
+           ============================================================ */
         .result-card {
             background: #10273e;
             border-radius: 16px;
@@ -254,16 +365,28 @@
             align-items: center;
             border-left: 4px solid #2ecc71;
         }
-        .result-card .doc-info h4 { font-weight: 600; }
-        .result-card .doc-info p { color: #a0b8cc; font-size: 0.9rem; }
+        .result-card .doc-info h4 {
+            font-weight: 600;
+        }
+        .result-card .doc-info p {
+            color: #a0b8cc;
+            font-size: 0.9rem;
+        }
         .result-card .doc-meta {
             display: flex;
             gap: 16px;
             align-items: center;
             flex-wrap: wrap;
         }
-        .result-card .status { color: #2ecc71; font-weight: 600; }
-        .result-card .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+        .result-card .status {
+            color: #2ecc71;
+            font-weight: 600;
+        }
+        .result-card .actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
         .result-card .actions button {
             background: transparent;
             border: 1px solid #f39c12;
@@ -287,7 +410,9 @@
             background: #e08e0b;
         }
 
-        /* Viewer */
+        /* ============================================================
+           VIEWER
+           ============================================================ */
         .viewer-placeholder {
             background: #0d1f36;
             border-radius: 20px;
@@ -304,20 +429,10 @@
             border: none;
             border-radius: 12px;
         }
-        .watermark-notice {
-            margin: 30px 0 10px;
-            padding: 12px;
-            background: #1a2f47;
-            border-radius: 12px;
-            border: 1px dashed #f39c12;
-            color: #f5d18b;
-            font-size: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .text-gold { color: #f39c12; }
 
+        /* ============================================================
+           ADMIN PANEL
+           ============================================================ */
         .admin-panel {
             background: #0d1f36;
             border-radius: 20px;
@@ -347,37 +462,70 @@
             color: #0b1a2f;
         }
 
-        .drive-badge {
-            display: inline-block;
-            background: #1a3a5a;
-            color: #f39c12;
-            padding: 4px 16px;
-            border-radius: 30px;
+        /* ============================================================
+           WATERMARK NOTICE
+           ============================================================ */
+        .watermark-notice {
+            margin: 30px 0 10px;
+            padding: 12px;
+            background: #1a2f47;
+            border-radius: 12px;
+            border: 1px dashed #f39c12;
+            color: #f5d18b;
             font-size: 0.8rem;
-            margin-left: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .text-gold {
+            color: #f39c12;
         }
 
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
         @media (max-width: 900px) {
             .navbar {
                 flex-direction: column;
                 align-items: stretch;
                 gap: 12px;
             }
-            .nav-links { justify-content: center; }
-            .nav-right { justify-content: center; }
-            .hero h2 { font-size: 2rem; }
-            .search-wrapper { max-width: 100%; }
+            .nav-links {
+                justify-content: center;
+            }
+            .nav-right {
+                justify-content: center;
+            }
+            .hero h2 {
+                font-size: 2rem;
+            }
+            .search-wrapper {
+                max-width: 100%;
+            }
         }
         @media (max-width: 600px) {
-            .card-grid { grid-template-columns: 1fr 1fr; }
-            .aircraft-grid { grid-template-columns: 1fr; }
-            .ata-grid { grid-template-columns: 1fr 1fr; }
+            .card-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .aircraft-grid {
+                grid-template-columns: 1fr;
+            }
+            .ata-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .result-card {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- NAV -->
+    <!-- ============================================================
+    NAVIGATION
+    ============================================================ -->
     <nav class="navbar container">
         <div class="nav-brand">
             <i class="fas fa-book-open"></i>
@@ -401,7 +549,9 @@
         </div>
     </nav>
 
-    <!-- HERO -->
+    <!-- ============================================================
+    HERO SECTION
+    ============================================================ -->
     <section class="hero">
         <div class="container">
             <h2>Find the Right Manual. <span>Faster.</span></h2>
@@ -411,22 +561,26 @@
                 <input type="text" id="globalSearch" placeholder="Search aircraft, ATA chapter, system or keyword..." />
                 <button onclick="performSearch()"><i class="fas fa-arrow-right"></i> SEARCH</button>
             </div>
-            <div style="margin-top:14px; display:flex; gap:16px; flex-wrap:wrap; font-size:0.85rem; color:#9bb4cc;">
-                <span><i class="fas fa-tag"></i> ATR 42_72</span>
-                <span><i class="fas fa-tag"></i> BOEING 737</span>
-                <span><i class="fas fa-tag"></i> CESSNA 172_182</span>
-                <span><i class="fas fa-tag"></i> PILATUS</span>
-                <span><i class="fas fa-tag"></i> ROBINSON R22</span>
-                <span><i class="fas fa-tag"></i> SIKORSKY S76</span>
+            <div class="tag-cloud">
+                <span onclick="searchTag('ATR 42_72')"><i class="fas fa-tag"></i> ATR 42_72</span>
+                <span onclick="searchTag('BOEING 737')"><i class="fas fa-tag"></i> BOEING 737</span>
+                <span onclick="searchTag('CESSNA 172_182')"><i class="fas fa-tag"></i> CESSNA 172_182</span>
+                <span onclick="searchTag('PILATUS MARK 1_2')"><i class="fas fa-tag"></i> PILATUS</span>
+                <span onclick="searchTag('ROBINSON R22')"><i class="fas fa-tag"></i> ROBINSON R22</span>
+                <span onclick="searchTag('SIKORSKY S76')"><i class="fas fa-tag"></i> SIKORSKY S76</span>
             </div>
         </div>
     </section>
 
+    <!-- ============================================================
+    MAIN CONTENT
+    ============================================================ -->
     <main class="container" id="app">
+
         <!-- QUICK ACCESS -->
         <div class="section-title">
             <i class="fas fa-thunderbolt"></i> Quick Access
-            <span class="drive-badge"><i class="fas fa-folder-open"></i> Connected to Drive</span>
+            <span class="drive-badge"><i class="fas fa-folder-open"></i> Google Drive</span>
         </div>
         <div class="card-grid" id="quickAccessGrid"></div>
 
@@ -440,7 +594,10 @@
 
         <!-- SEARCH RESULTS -->
         <div id="searchResultsArea" style="display:none;">
-            <div class="section-title"><i class="fas fa-file-alt"></i> Search Results <span id="resultCount" style="font-size:0.9rem; font-weight:400; color:#a0b8cc;"></span></div>
+            <div class="section-title">
+                <i class="fas fa-file-alt"></i> Search Results
+                <span id="resultCount" style="font-size:0.9rem; font-weight:400; color:#a0b8cc;"></span>
+            </div>
             <div id="searchResultsList"></div>
         </div>
 
@@ -449,7 +606,8 @@
         <div class="viewer-placeholder" id="viewerPlaceholder">
             <i class="fas fa-file-pdf" style="font-size:3rem; opacity:0.3;"></i>
             <p style="margin-top:12px; color:#8aaac0;">Select a manual to preview</p>
-            <div style="position:absolute; top:20%; left:10%; right:10%; color:#f39c12; opacity:0.15; font-size:2.5rem; font-weight:700; pointer-events:none; transform:rotate(-12deg); text-align:center; letter-spacing:4px; text-shadow:0 0 10px #000;">
+            <!-- Watermark -->
+            <div style="position:absolute; top:20%; left:10%; right:10%; color:#f39c12; opacity:0.12; font-size:2.5rem; font-weight:700; pointer-events:none; transform:rotate(-12deg); text-align:center; letter-spacing:4px; text-shadow:0 0 10px #000;">
                 AMT DIGITAL LIBRARY<br><span style="font-size:1.2rem;">STUDENT ACCESS ONLY</span>
             </div>
         </div>
@@ -458,34 +616,42 @@
         <div class="admin-panel">
             <h4 style="color:#f39c12; margin-bottom:8px;"><i class="fas fa-user-cog"></i> Admin Panel</h4>
             <p style="font-size:0.85rem; color:#8aaac0; margin-bottom:12px;">
-                <i class="fas fa-info-circle"></i> 
-                <strong>Google Drive Connected:</strong> Each aircraft has its own folder. Click any manual to open its Drive folder.
+                <i class="fas fa-info-circle"></i>
+                <strong>Google Drive Connected:</strong> Each aircraft has its own folder. Click any manual to open it in Drive.
             </p>
             <div class="admin-grid">
-                <button onclick="window.open('https://drive.google.com/drive/folders/1LSmoOV2YN4tyFwUEac0TZkIFOzaHRhXs?usp=drive_link', '_blank')">
+                <button onclick="window.open(MAIN_DRIVE_URL, '_blank')">
                     <i class="fas fa-folder-open"></i> Main Library
                 </button>
                 <button onclick="location.reload()"><i class="fas fa-sync"></i> Refresh</button>
                 <button onclick="showHelp()"><i class="fas fa-question-circle"></i> Help</button>
                 <span style="color:#8aaac0; font-size:0.85rem; margin-left:auto;">
-                    <i class="fas fa-file-alt text-gold"></i> <span id="totalManuals">0</span> manuals · 
+                    <i class="fas fa-file-alt text-gold"></i> <span id="totalManuals">0</span> manuals ·
                     <i class="fas fa-plane text-gold"></i> <span id="totalAircraft">0</span> aircraft
                 </span>
             </div>
         </div>
 
         <!-- FOOTER -->
-        <div class="watermark-notice" style="margin:20px 0 40px;">
-            <i class="fas fa-shield-alt"></i> AMT DIGITAL TECHNICAL LIBRARY — "Find. Access. Maintain." • All manuals for educational use only.
+        <div class="watermark-notice">
+            <i class="fas fa-shield-alt"></i>
+            AMT DIGITAL TECHNICAL LIBRARY — "Find. Access. Maintain." • All manuals for educational use only.
         </div>
+
     </main>
 
+    <!-- ============================================================
+    JAVASCRIPT - COMPLETE APPLICATION LOGIC
+    ============================================================ -->
     <script>
         // ============================================================
-        // GOOGLE DRIVE CONFIGURATION - EACH AIRCRAFT HAS ITS OWN FOLDER
+        // CONFIGURATION - EDIT THIS SECTION ONLY!
         // ============================================================
 
-        // Map each aircraft to its specific Drive folder URL
+        // 1. MAIN DRIVE FOLDER (for Quick Access and fallback)
+        const MAIN_DRIVE_URL = "https://drive.google.com/drive/folders/1LSmoOV2YN4tyFwUEac0TZkIFOzaHRhXs?usp=drive_link";
+
+        // 2. AIRCRAFT FOLDERS - Map each aircraft to its Drive folder
         const AIRCRAFT_DRIVE_LINKS = {
             "ATR 42_72": "https://drive.google.com/drive/folders/1WWGOBXBJIW2x7CZCBgQUpnG5VYoixmLG?usp=sharing",
             "BOEING 737": "https://drive.google.com/drive/folders/16GNjbc9GbBTjHKfweE9zm8sqqUPWpcI1?usp=sharing",
@@ -495,19 +661,17 @@
             "SIKORSKY S76": "https://drive.google.com/drive/folders/1TSMj8IQx_Pxx-rMb4UJjS2zxPNSMm42I?usp=sharing"
         };
 
-        // Fallback: Main library folder (used for "Quick Access" and "Main Library" button)
-        const MAIN_DRIVE_URL = "https://drive.google.com/drive/folders/1LSmoOV2YN4tyFwUEac0TZkIFOzaHRhXs?usp=drive_link";
+        // ============================================================
+        // DATA - Auto-generated from configuration above
+        // ============================================================
 
-        // List of aircraft (must match the keys in AIRCRAFT_DRIVE_LINKS)
-        const AIRCRAFT_FOLDERS = Object.keys(AIRCRAFT_DRIVE_LINKS);
+        // Get list of aircraft from the keys
+        const AIRCRAFT_LIST = Object.keys(AIRCRAFT_DRIVE_LINKS);
 
         // Manual types (subfolders inside each aircraft)
         const MANUAL_TYPES = ['AMM', 'WDM', 'SRM', 'TSM', 'MM', 'SPM'];
 
-        // ============================================================
-        // ATA TITLES (for display only)
-        // ============================================================
-
+        // ATA Titles (for display)
         const ATA_TITLES = {
             '00': 'GENERAL',
             '05': 'TIME LIMITS / MAINTENANCE CHECKS',
@@ -540,24 +704,40 @@
             '71': 'POWER PLANT'
         };
 
+        // Icons for manual types
+        const TYPE_ICONS = {
+            'AMM': 'fa-plane',
+            'MM': 'fa-wrench',
+            'WDM': 'fa-bolt',
+            'SRM': 'fa-ruler-combined',
+            'TSM': 'fa-screwdriver',
+            'SPM': 'fa-clipboard-list'
+        };
+
         // ============================================================
-        // BUILD LIBRARY FROM FOLDER STRUCTURE
+        // LIBRARY ENGINE
         // ============================================================
 
         let allManuals = [];
 
+        /**
+         * Generate the complete library from configuration
+         * Each aircraft gets 3-5 ATA chapters per manual type
+         */
         function generateLibrary() {
             allManuals = [];
             const ataKeys = Object.keys(ATA_TITLES);
 
-            AIRCRAFT_FOLDERS.forEach(aircraft => {
+            AIRCRAFT_LIST.forEach(aircraft => {
                 const driveUrl = AIRCRAFT_DRIVE_LINKS[aircraft] || MAIN_DRIVE_URL;
+
                 MANUAL_TYPES.forEach(manualType => {
-                    // Generate 3-5 ATA chapters per manual type (simulating what's in Drive)
+                    // Generate 3-5 random ATA chapters
                     const count = 3 + Math.floor(Math.random() * 3);
                     for (let i = 0; i < count && i < ataKeys.length; i++) {
                         const ata = ataKeys[i];
                         const title = ATA_TITLES[ata] || 'UNKNOWN';
+
                         allManuals.push({
                             id: `${aircraft}-${manualType}-${ata}`,
                             aircraft: aircraft,
@@ -566,7 +746,7 @@
                             manualTitle: manualType,
                             ataChapter: ata,
                             ataTitle: title,
-                            driveFolderUrl: driveUrl, // Each manual uses its aircraft's Drive link
+                            driveFolderUrl: driveUrl,
                             fileName: `${manualType}-${ata}.pdf`,
                             status: 'available',
                             keywords: [ata, title, aircraft, manualType].map(s => s.toLowerCase())
@@ -575,48 +755,51 @@
                 });
             });
 
-            // Update counters
+            // Update counters in UI
             document.getElementById('totalManuals').textContent = allManuals.length;
-            document.getElementById('totalAircraft').textContent = AIRCRAFT_FOLDERS.length;
+            document.getElementById('totalAircraft').textContent = AIRCRAFT_LIST.length;
         }
 
         // ============================================================
         // RENDER FUNCTIONS
         // ============================================================
 
+        /**
+         * Render Quick Access cards
+         */
         function renderQuickAccess() {
             const grid = document.getElementById('quickAccessGrid');
             grid.innerHTML = '';
-            const iconMap = {
-                'AMM': 'fa-plane',
-                'MM': 'fa-wrench',
-                'WDM': 'fa-bolt',
-                'SRM': 'fa-ruler-combined',
-                'TSM': 'fa-screwdriver',
-                'SPM': 'fa-clipboard-list'
-            };
+
             MANUAL_TYPES.forEach(type => {
                 const count = allManuals.filter(m => m.manualType === type).length;
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.innerHTML = `
-                    <i class="fas ${iconMap[type] || 'fa-file'}"></i>
+                    <i class="fas ${TYPE_ICONS[type] || 'fa-file'}"></i>
                     <h4>${type}</h4>
                     <span class="badge">${count} docs</span>
                 `;
                 card.addEventListener('click', () => {
-                    window.open(MAIN_DRIVE_URL, '_blank');
+                    performSearch(type);
                 });
                 grid.appendChild(card);
             });
         }
 
+        /**
+         * Render Aircraft cards
+         */
         function renderAircraft() {
             const grid = document.getElementById('aircraftGrid');
             grid.innerHTML = '';
+
+            // Group manuals by aircraft
             const aircraftMap = new Map();
             allManuals.forEach(m => {
-                if (!aircraftMap.has(m.aircraft)) aircraftMap.set(m.aircraft, new Set());
+                if (!aircraftMap.has(m.aircraft)) {
+                    aircraftMap.set(m.aircraft, new Set());
+                }
                 aircraftMap.get(m.aircraft).add(m.manualType);
             });
 
@@ -624,8 +807,10 @@
                 const driveUrl = AIRCRAFT_DRIVE_LINKS[aircraft] || MAIN_DRIVE_URL;
                 const card = document.createElement('div');
                 card.className = 'aircraft-card';
+
                 const isHelicopter = aircraft.includes('Sikorsky') || aircraft.includes('Robinson');
                 const icon = isHelicopter ? 'fa-helicopter' : 'fa-plane';
+
                 card.innerHTML = `
                     <div class="top">
                         <i class="fas ${icon}"></i>
@@ -634,7 +819,9 @@
                             <small>${aircraft.split(' ')[0]}</small>
                         </div>
                     </div>
-                    <div class="meta">${Array.from(types).map(t => `<span>${t}</span>`).join('')}</div>
+                    <div class="meta">
+                        ${Array.from(types).map(t => `<span>${t}</span>`).join('')}
+                    </div>
                     <button class="btn-sm" onclick="window.open('${driveUrl}', '_blank')">
                         <i class="fas fa-folder-open"></i> OPEN IN DRIVE
                     </button>
@@ -643,9 +830,13 @@
             }
         }
 
+        /**
+         * Render ATA Chapters
+         */
         function renderATA() {
             const grid = document.getElementById('ataGrid');
             grid.innerHTML = '';
+
             const ataMap = new Map();
             allManuals.forEach(m => {
                 if (!ataMap.has(m.ataChapter)) {
@@ -653,16 +844,18 @@
                 }
                 ataMap.get(m.ataChapter).count++;
             });
+
             const sorted = Array.from(ataMap.entries()).sort((a, b) => parseInt(a[0]) - parseInt(b[0]));
+
             for (const [ata, { title, count }] of sorted) {
                 const div = document.createElement('div');
                 div.className = 'ata-item';
                 div.innerHTML = `
-                    <strong>ATA ${ata}</strong> ${title} 
+                    <strong>ATA ${ata}</strong> ${title}
                     <span style="color:#8aaac0;font-size:0.7rem;">(${count})</span>
                 `;
                 div.addEventListener('click', () => {
-                    window.open(MAIN_DRIVE_URL, '_blank');
+                    performSearch(`ATA ${ata}`);
                 });
                 grid.appendChild(div);
             }
@@ -672,24 +865,36 @@
         // SEARCH ENGINE
         // ============================================================
 
-        function performSearch() {
+        /**
+         * Perform search and display results
+         */
+        function performSearch(query) {
             const input = document.getElementById('globalSearch');
-            const query = input.value.trim().toLowerCase();
+            const searchTerm = (query || input.value || '').trim().toLowerCase();
+
             const area = document.getElementById('searchResultsArea');
             const list = document.getElementById('searchResultsList');
             const countSpan = document.getElementById('resultCount');
 
-            if (!query) {
+            if (!searchTerm) {
                 area.style.display = 'none';
                 return;
             }
 
+            // Filter manuals
             const results = allManuals.filter(m => {
-                const haystack = `${m.aircraft} ${m.manualType} ${m.ataChapter} ${m.ataTitle} ${m.fileName} ${m.keywords.join(' ')}`
-                    .toLowerCase();
-                return haystack.includes(query);
+                const haystack = [
+                    m.aircraft,
+                    m.manualType,
+                    m.ataChapter,
+                    m.ataTitle,
+                    m.fileName,
+                    ...m.keywords
+                ].join(' ').toLowerCase();
+                return haystack.includes(searchTerm);
             });
 
+            // Show results
             area.style.display = 'block';
             countSpan.textContent = `${results.length} documents found`;
             list.innerHTML = '';
@@ -698,9 +903,9 @@
                 list.innerHTML = `
                     <div style="padding:40px;text-align:center;color:#8aaac0;">
                         <i class="fas fa-search" style="font-size:3rem;opacity:0.3;"></i>
-                        <p style="margin-top:12px;">No manuals found for "${query}"</p>
+                        <p style="margin-top:12px;">No manuals found for "${searchTerm}"</p>
                         <p style="font-size:0.85rem;margin-top:8px;">
-                            <i class="fas fa-lightbulb text-gold"></i> 
+                            <i class="fas fa-lightbulb text-gold"></i>
                             Try searching by aircraft name, ATA number, or manual type
                         </p>
                     </div>
@@ -708,13 +913,16 @@
                 return;
             }
 
+            // Render results
             results.forEach(m => {
                 const div = document.createElement('div');
                 div.className = 'result-card';
                 div.innerHTML = `
                     <div class="doc-info">
                         <h4>${m.aircraft} · ATA ${m.ataChapter} – ${m.ataTitle}</h4>
-                        <p><i class="fas fa-book"></i> ${m.manualTitle} <span style="color:#8aaac0; margin-left:12px;">${m.manualType}-${m.ataChapter}</span></p>
+                        <p><i class="fas fa-book"></i> ${m.manualTitle}
+                            <span style="color:#8aaac0; margin-left:12px;">${m.manualType}-${m.ataChapter}</span>
+                        </p>
                         <span class="status"><i class="fas fa-check-circle"></i> AVAILABLE</span>
                     </div>
                     <div class="doc-meta">
@@ -722,10 +930,10 @@
                             <i class="fas fa-folder-open"></i> In Drive
                         </span>
                         <div class="actions">
-                            <button class="open-btn" onclick="openInDrive('${m.id}')">
+                            <button class="open-btn" onclick="openManual('${m.id}')">
                                 <i class="fas fa-external-link-alt"></i> OPEN IN DRIVE
                             </button>
-                            <button onclick="showManualInfo('${m.id}')">
+                            <button onclick="showDetails('${m.id}')">
                                 <i class="fas fa-info-circle"></i> DETAILS
                             </button>
                         </div>
@@ -733,13 +941,19 @@
                 `;
                 list.appendChild(div);
             });
+
+            // Scroll to results
+            area.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         // ============================================================
         // ACTION FUNCTIONS
         // ============================================================
 
-        function openInDrive(manualId) {
+        /**
+         * Open a manual in Google Drive
+         */
+        function openManual(manualId) {
             const manual = allManuals.find(m => m.id === manualId);
             if (manual) {
                 window.open(manual.driveFolderUrl, '_blank');
@@ -748,93 +962,7 @@
             }
         }
 
-        function showManualInfo(manualId) {
-            const manual = allManuals.find(m => m.id === manualId);
-            if (!manual) return;
-
-            const info = `
-        📄 MANUAL DETAILS
-
-        Aircraft: ${manual.aircraft}
-        Manual Type: ${manual.manualTitle} (${manual.manualType})
-        ATA Chapter: ${manual.ataChapter} - ${manual.ataTitle}
-        File: ${manual.fileName}
-        Status: ${manual.status.toUpperCase()}
-
-        📁 Location:
-        ${manual.driveFolderUrl}
-
-        Click "OPEN IN DRIVE" to view the manual.
-        `;
-            alert(info);
-        }
-
-        function showHelp() {
-            const help = `
-        🛩️ AMT DIGITAL LIBRARY
-
-        HOW TO USE:
-        1. Search for a manual using the search bar
-        2. Click on any aircraft card to browse
-        3. Click "OPEN IN DRIVE" to view the manual
-
-        SEARCH TIPS:
-        • Search by aircraft: "ATR", "BOEING"
-        • Search by ATA: "32", "21"
-        • Search by manual type: "AMM", "WDM"
-
-        GOOGLE DRIVE:
-        Each aircraft has its own folder. Click "OPEN IN DRIVE" to go directly to that aircraft's folder.
-
-        ADDING MANUALS:
-        1. Go to the aircraft's Drive folder
-        2. Create subfolders: AMM/, WDM/, etc.
-        3. Upload PDFs with ATA in filename
-        4. Refresh this page
-
-        For more help, contact your administrator.
-        `;
-            alert(help);
-        }
-
-        // ============================================================
-        // KEYBOARD SHORTCUTS
-        // ============================================================
-
-        document.addEventListener('keydown', function(e) {
-            if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
-                e.preventDefault();
-                document.getElementById('globalSearch').focus();
-            }
-            if (e.key === 'Escape') {
-                document.getElementById('globalSearch').value = '';
-                document.getElementById('searchResultsArea').style.display = 'none';
-            }
-        });
-
-        // ============================================================
-        // INITIALIZE
-        // ============================================================
-
-        generateLibrary();
-        renderQuickAccess();
-        renderAircraft();
-        renderATA();
-
-        window.performSearch = performSearch;
-        window.openInDrive = openInDrive;
-        window.showManualInfo = showManualInfo;
-        window.showHelp = showHelp;
-
-        document.getElementById('globalSearch').addEventListener('keyup', (e) => {
-            if (e.key === 'Enter') performSearch();
-        });
-
-        document.addEventListener('contextmenu', e => e.preventDefault());
-
-        console.log('🛩️ AMT Digital Library initialized!');
-        console.log(`📚 Found ${allManuals.length} manuals across ${AIRCRAFT_FOLDERS.length} aircraft`);
-        console.log('💡 Each aircraft has its own Drive folder.');
-    </script>
-</body>
-</html>
+        /**
+         * Show manual details in an alert
+         */
+        function showDetails
