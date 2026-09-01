@@ -7,32 +7,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', sans-serif;
             background: #0b1a2f;
             color: #e8edf2;
             line-height: 1.5;
         }
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #1a2d44;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #f39c12;
-            border-radius: 8px;
-        }
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #1a2d44; }
+        ::-webkit-scrollbar-thumb { background: #f39c12; border-radius: 8px; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
 
         /* NAV */
         .navbar {
@@ -44,25 +29,10 @@
             flex-wrap: wrap;
             justify-content: space-between;
         }
-        .nav-brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .nav-brand i {
-            font-size: 28px;
-            color: #f39c12;
-        }
-        .nav-brand h1 {
-            font-size: 1.4rem;
-            font-weight: 700;
-        }
-        .nav-brand small {
-            display: block;
-            font-weight: 400;
-            font-size: 0.7rem;
-            color: #a0b8cc;
-        }
+        .nav-brand { display: flex; align-items: center; gap: 12px; }
+        .nav-brand i { font-size: 28px; color: #f39c12; }
+        .nav-brand h1 { font-size: 1.4rem; font-weight: 700; }
+        .nav-brand small { display: block; font-weight: 400; font-size: 0.7rem; color: #a0b8cc; }
         .nav-links {
             display: flex;
             gap: 24px;
@@ -134,18 +104,9 @@
             background: linear-gradient(145deg, #0b1a2f 0%, #13273f 100%);
             border-bottom: 1px solid #1f3a57;
         }
-        .hero h2 {
-            font-size: 2.8rem;
-            font-weight: 700;
-        }
-        .hero h2 span {
-            color: #f39c12;
-        }
-        .hero p {
-            color: #b0c8dd;
-            max-width: 600px;
-            margin: 12px 0 24px;
-        }
+        .hero h2 { font-size: 2.8rem; font-weight: 700; }
+        .hero h2 span { color: #f39c12; }
+        .hero p { color: #b0c8dd; max-width: 600px; margin: 12px 0 24px; }
         .search-wrapper {
             background: #1a2f47;
             border-radius: 60px;
@@ -155,11 +116,7 @@
             max-width: 780px;
             border: 1px solid #2d4a68;
         }
-        .search-wrapper i {
-            color: #f39c12;
-            font-size: 1.2rem;
-            margin-right: 10px;
-        }
+        .search-wrapper i { color: #f39c12; font-size: 1.2rem; margin-right: 10px; }
         .search-wrapper input {
             background: transparent;
             border: none;
@@ -169,9 +126,7 @@
             font-size: 1rem;
             outline: none;
         }
-        .search-wrapper input::placeholder {
-            color: #7f9bb5;
-        }
+        .search-wrapper input::placeholder { color: #7f9bb5; }
         .search-wrapper button {
             background: #f39c12;
             border: none;
@@ -190,9 +145,7 @@
             align-items: center;
             gap: 12px;
         }
-        .section-title i {
-            color: #f39c12;
-        }
+        .section-title i { color: #f39c12; }
 
         /* Cards */
         .card-grid {
@@ -214,15 +167,8 @@
             transform: translateY(-4px);
             background: #1a3450;
         }
-        .card i {
-            font-size: 2.2rem;
-            color: #f39c12;
-            margin-bottom: 12px;
-        }
-        .card h4 {
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
+        .card i { font-size: 2.2rem; color: #f39c12; margin-bottom: 12px; }
+        .card h4 { font-size: 1.1rem; font-weight: 600; }
         .card .badge {
             background: #1f3a57;
             display: inline-block;
@@ -248,27 +194,11 @@
             flex-direction: column;
             border: 1px solid #1f3a57;
         }
-        .aircraft-card .top {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-        .aircraft-card .top i {
-            font-size: 2.4rem;
-            color: #f39c12;
-        }
-        .aircraft-card .info h4 {
-            font-weight: 600;
-        }
-        .aircraft-card .info small {
-            color: #8aaac0;
-        }
-        .aircraft-card .meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin: 12px 0;
-        }
+        .aircraft-card .top { display: flex; align-items: center; gap: 14px; }
+        .aircraft-card .top i { font-size: 2.4rem; color: #f39c12; }
+        .aircraft-card .info h4 { font-weight: 600; }
+        .aircraft-card .info small { color: #8aaac0; }
+        .aircraft-card .meta { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
         .aircraft-card .meta span {
             background: #1f3a57;
             padding: 2px 12px;
@@ -309,12 +239,8 @@
             transition: 0.1s;
             cursor: pointer;
         }
-        .ata-item strong {
-            color: #f39c12;
-        }
-        .ata-item:hover {
-            background: #1a3450;
-        }
+        .ata-item strong { color: #f39c12; }
+        .ata-item:hover { background: #1a3450; }
 
         /* Results */
         .result-card {
@@ -328,28 +254,16 @@
             align-items: center;
             border-left: 4px solid #2ecc71;
         }
-        .result-card .doc-info h4 {
-            font-weight: 600;
-        }
-        .result-card .doc-info p {
-            color: #a0b8cc;
-            font-size: 0.9rem;
-        }
+        .result-card .doc-info h4 { font-weight: 600; }
+        .result-card .doc-info p { color: #a0b8cc; font-size: 0.9rem; }
         .result-card .doc-meta {
             display: flex;
             gap: 16px;
             align-items: center;
             flex-wrap: wrap;
         }
-        .result-card .status {
-            color: #2ecc71;
-            font-weight: 600;
-        }
-        .result-card .actions {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
+        .result-card .status { color: #2ecc71; font-weight: 600; }
+        .result-card .actions { display: flex; gap: 12px; flex-wrap: wrap; }
         .result-card .actions button {
             background: transparent;
             border: 1px solid #f39c12;
@@ -402,9 +316,7 @@
             align-items: center;
             gap: 12px;
         }
-        .text-gold {
-            color: #f39c12;
-        }
+        .text-gold { color: #f39c12; }
 
         .admin-panel {
             background: #0d1f36;
@@ -451,29 +363,15 @@
                 align-items: stretch;
                 gap: 12px;
             }
-            .nav-links {
-                justify-content: center;
-            }
-            .nav-right {
-                justify-content: center;
-            }
-            .hero h2 {
-                font-size: 2rem;
-            }
-            .search-wrapper {
-                max-width: 100%;
-            }
+            .nav-links { justify-content: center; }
+            .nav-right { justify-content: center; }
+            .hero h2 { font-size: 2rem; }
+            .search-wrapper { max-width: 100%; }
         }
         @media (max-width: 600px) {
-            .card-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .aircraft-grid {
-                grid-template-columns: 1fr;
-            }
-            .ata-grid {
-                grid-template-columns: 1fr 1fr;
-            }
+            .card-grid { grid-template-columns: 1fr 1fr; }
+            .aircraft-grid { grid-template-columns: 1fr; }
+            .ata-grid { grid-template-columns: 1fr 1fr; }
         }
     </style>
 </head>
@@ -561,11 +459,11 @@
             <h4 style="color:#f39c12; margin-bottom:8px;"><i class="fas fa-user-cog"></i> Admin Panel</h4>
             <p style="font-size:0.85rem; color:#8aaac0; margin-bottom:12px;">
                 <i class="fas fa-info-circle"></i> 
-                <strong>Google Drive Connected:</strong> All manuals are stored in your Drive folder.
+                <strong>Google Drive Connected:</strong> All manuals are stored in your shared Drive folder.
                 Click any manual to open it directly in Drive.
             </p>
             <div class="admin-grid">
-                <button onclick="window.open('https://drive.google.com/drive/folders/1LSmoOV2YN4tyFwUEac0TZkIFOzaHRhXs', '_blank')">
+                <button onclick="window.open('https://drive.google.com/drive/folders/1LSmoOV2YN4tyFwUEac0TZkIFOzaHRhXs?usp=drive_link', '_blank')">
                     <i class="fas fa-folder-open"></i> Open Drive Library
                 </button>
                 <button onclick="location.reload()"><i class="fas fa-sync"></i> Refresh</button>
@@ -585,14 +483,13 @@
 
     <script>
         // ============================================================
-        // GOOGLE DRIVE CONFIGURATION - EDIT THESE TWO LINES ONLY!
+        // GOOGLE DRIVE CONFIGURATION - YOUR SHARED FOLDER LINK
         // ============================================================
 
-        // Your shared Drive folder URL (from the link you provided)
-        const DRIVE_FOLDER_URL = "https://drive.google.com/drive/folders/1LSmoOV2YN4tyFwUEac0TZkIFOzaHRhXs";
+        // This is your exact shared Drive folder link
+        const DRIVE_FOLDER_URL = "https://drive.google.com/drive/folders/1LSmoOV2YN4tyFwUEac0TZkIFOzaHRhXs?usp=drive_link";
 
         // Your aircraft folders (exactly as they appear in Drive)
-        // Add or remove aircraft as needed
         const AIRCRAFT_FOLDERS = [
             "ATR 42_72",
             "BOEING 737",
@@ -668,7 +565,7 @@
                             manualTitle: manualType,
                             ataChapter: ata,
                             ataTitle: title,
-                            driveFolderUrl: DRIVE_FOLDER_URL,
+                            driveFolderUrl: DRIVE_FOLDER_URL, // All links point to your shared folder
                             fileName: `${manualType}-${ata}.pdf`,
                             status: 'available',
                             keywords: [ata, title, aircraft, manualType].map(s => s.toLowerCase())
@@ -842,13 +739,8 @@
         // ============================================================
 
         function openInDrive(manualId) {
-            // Find the manual and open its Drive folder
-            const manual = allManuals.find(m => m.id === manualId);
-            if (manual) {
-                window.open(manual.driveFolderUrl, '_blank');
-            } else {
-                window.open(DRIVE_FOLDER_URL, '_blank');
-            }
+            // All manuals open the same shared Drive folder
+            window.open(DRIVE_FOLDER_URL, '_blank');
         }
 
         function showManualInfo(manualId) {
@@ -887,7 +779,7 @@
         • Search by manual type: "AMM", "WDM"
 
         GOOGLE DRIVE:
-        All manuals are stored in your Drive folder:
+        All manuals are stored in your shared Drive folder:
         ${DRIVE_FOLDER_URL}
 
         ADDING MANUALS:
