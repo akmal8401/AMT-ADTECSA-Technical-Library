@@ -780,7 +780,7 @@
                     <h4>${type}</h4>
                     <span class="badge">${count} docs</span>
                 `;
-                card.addEventListener('click', () => {
+                card.addEventListener('click', function() {
                     performSearch(type);
                 });
                 grid.appendChild(card);
@@ -854,7 +854,7 @@
                     <strong>ATA ${ata}</strong> ${title}
                     <span style="color:#8aaac0;font-size:0.7rem;">(${count})</span>
                 `;
-                div.addEventListener('click', () => {
+                div.addEventListener('click', function() {
                     performSearch(`ATA ${ata}`);
                 });
                 grid.appendChild(div);
@@ -965,4 +965,9 @@
         /**
          * Show manual details in an alert
          */
-        function showDetails
+        function showDetails(manualId) {
+            const manual = allManuals.find(m => m.id === manualId);
+            if (!manual) return;
+
+            const info =
+                `📄 MANUAL DETAILS\n\nAircraft: ${
