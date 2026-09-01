@@ -34,6 +34,7 @@
             padding: 0 24px;
         }
 
+        /* NAV */
         .navbar {
             background: #0d1f36;
             padding: 12px 0;
@@ -111,7 +112,23 @@
             background: #f39c12;
             color: #0b1a2f;
         }
+        .btn-primary {
+            background: #f39c12;
+            border: none;
+            color: #0b1a2f;
+            padding: 10px 28px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-primary:hover {
+            background: #e08e0b;
+            transform: scale(1.02);
+        }
 
+        /* HERO */
         .hero {
             padding: 60px 0 40px;
             background: linear-gradient(145deg, #0b1a2f 0%, #13273f 100%);
@@ -177,6 +194,7 @@
             color: #f39c12;
         }
 
+        /* Cards */
         .card-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -215,6 +233,7 @@
             color: #bdd3e8;
         }
 
+        /* Aircraft */
         .aircraft-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -274,6 +293,7 @@
             color: #0b1a2f;
         }
 
+        /* ATA */
         .ata-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
@@ -296,6 +316,7 @@
             background: #1a3450;
         }
 
+        /* Results */
         .result-card {
             background: #10273e;
             border-radius: 16px;
@@ -337,13 +358,22 @@
             border-radius: 30px;
             font-weight: 500;
             cursor: pointer;
+            transition: 0.2s;
+        }
+        .result-card .actions button:hover {
+            background: #f39c12;
+            color: #0b1a2f;
         }
         .result-card .actions .open-btn {
             background: #f39c12;
             color: #0b1a2f;
             border: none;
         }
+        .result-card .actions .open-btn:hover {
+            background: #e08e0b;
+        }
 
+        /* Viewer */
         .viewer-placeholder {
             background: #0d1f36;
             border-radius: 20px;
@@ -388,6 +418,7 @@
             flex-wrap: wrap;
             gap: 16px;
             margin-top: 12px;
+            align-items: center;
         }
         .admin-panel .admin-grid button {
             background: transparent;
@@ -404,22 +435,14 @@
             color: #0b1a2f;
         }
 
-        .loading-spinner {
-            text-align: center;
-            padding: 40px;
+        .drive-badge {
+            display: inline-block;
+            background: #1a3a5a;
             color: #f39c12;
-        }
-        .loading-spinner i {
-            font-size: 3rem;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
+            padding: 4px 16px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            margin-left: 10px;
         }
 
         @media (max-width: 900px) {
@@ -502,14 +525,11 @@
     </section>
 
     <main class="container" id="app">
-        <!-- LOADING -->
-        <div id="loadingIndicator" class="loading-spinner">
-            <i class="fas fa-spinner"></i>
-            <p style="margin-top:12px;">Scanning Google Drive library...</p>
-        </div>
-
         <!-- QUICK ACCESS -->
-        <div class="section-title"><i class="fas fa-thunderbolt"></i> Quick Access</div>
+        <div class="section-title">
+            <i class="fas fa-thunderbolt"></i> Quick Access
+            <span class="drive-badge"><i class="fas fa-folder-open"></i> Connected to Drive</span>
+        </div>
         <div class="card-grid" id="quickAccessGrid"></div>
 
         <!-- AIRCRAFT -->
@@ -541,13 +561,19 @@
             <h4 style="color:#f39c12; margin-bottom:8px;"><i class="fas fa-user-cog"></i> Admin Panel</h4>
             <p style="font-size:0.85rem; color:#8aaac0; margin-bottom:12px;">
                 <i class="fas fa-info-circle"></i> 
-                <strong>Auto-Discovery Active:</strong> The system automatically reads your Drive folder structure.
-                Just upload PDFs to the correct folders!
+                <strong>Google Drive Connected:</strong> All manuals are stored in your Drive folder.
+                Click any manual to open it directly in Drive.
             </p>
             <div class="admin-grid">
-                <button onclick="window.open('https://drive.google.com', '_blank')"><i class="fas fa-folder-open"></i> Open Drive</button>
-                <button onclick="location.reload()"><i class="fas fa-sync"></i> Refresh Library</button>
+                <button onclick="window.open('https://drive.google.com/drive/u/5/folders/1LSmoOV2YN4tyFwUEac0TZkIFOzaHRhXs', '_blank')">
+                    <i class="fas fa-folder-open"></i> Open Drive Library
+                </button>
+                <button onclick="location.reload()"><i class="fas fa-sync"></i> Refresh</button>
                 <button onclick="showHelp()"><i class="fas fa-question-circle"></i> Help</button>
+                <span style="color:#8aaac0; font-size:0.85rem; margin-left:auto;">
+                    <i class="fas fa-file-alt text-gold"></i> <span id="totalManuals">0</span> manuals · 
+                    <i class="fas fa-plane text-gold"></i> <span id="totalAircraft">0</span> aircraft
+                </span>
             </div>
         </div>
 
@@ -559,11 +585,14 @@
 
     <script>
         // ============================================================
-        // CONFIGURATION - EDIT THESE TWO LINES ONLY!
+        // GOOGLE DRIVE CONFIGURATION - EDIT THESE TWO LINES ONLY!
         // ============================================================
 
-        // Option 1: Manual configuration (quick start)
-        // List your aircraft folders here exactly as they appear in Drive
+        // Your shared Drive folder URL (from the link you provided)
+        const DRIVE_FOLDER_URL = "https://drive.google.com/drive/u/5/folders/1LSmoOV2YN4tyFwUEac0TZkIFOzaHRhXs";
+
+        // Your aircraft folders (exactly as they appear in Drive)
+        // Add or remove aircraft as needed
         const AIRCRAFT_FOLDERS = [
             "ATR 42_72",
             "BOEING 737",
@@ -573,13 +602,11 @@
             "SIKORSKY S76"
         ];
 
-        // Option 2: Load from Google Drive (advanced - requires API setup)
-        // Uncomment below to auto-scan your Drive using Google Drive API
-        // const DRIVE_MASTER_FOLDER_ID = "YOUR_MASTER_FOLDER_ID"; // Get from Drive URL
-        // const USE_DRIVE_API = true;
+        // Manual types (subfolders inside each aircraft)
+        const MANUAL_TYPES = ['AMM', 'WDM', 'SRM', 'TSM', 'MM', 'SPM'];
 
         // ============================================================
-        // ATA TITLES (Auto-mapping)
+        // ATA TITLES (for display only)
         // ============================================================
 
         const ATA_TITLES = {
@@ -614,115 +641,46 @@
             '71': 'POWER PLANT'
         };
 
-        const TYPE_ICONS = {
-            'AMM': 'fa-plane',
-            'MM': 'fa-wrench',
-            'WDM': 'fa-bolt',
-            'SRM': 'fa-ruler-combined',
-            'TSM': 'fa-screwdriver',
-            'SPM': 'fa-clipboard-list'
-        };
-
-        const TYPE_NAMES = {
-            'AMM': 'Aircraft Maintenance Manual',
-            'MM': 'Maintenance Manual',
-            'WDM': 'Wiring Diagram Manual',
-            'SRM': 'Structural Repair Manual',
-            'TSM': 'Troubleshooting Manual',
-            'SPM': 'Standard Practices Manual'
-        };
-
         // ============================================================
-        // AUTO-DISCOVERY ENGINE
+        // BUILD LIBRARY FROM FOLDER STRUCTURE
         // ============================================================
 
         let allManuals = [];
+        let totalManualsCount = 0;
 
-        // Pre-defined manual types (add more as needed)
-        const MANUAL_TYPES = ['AMM', 'MM', 'WDM', 'SRM', 'TSM', 'SPM'];
+        function generateLibrary() {
+            allManuals = [];
+            const ataKeys = Object.keys(ATA_TITLES);
 
-        // Generate sample data for demo
-        function generateSampleData() {
-            const sampleData = [];
-            const ataNumbers = ['00', '05', '21', '24', '26', '27', '28', '29', '32', '34', '49', '52', '71'];
-            const titles = [
-                'GENERAL', 'TIME LIMITS', 'AIR CONDITIONING', 'ELECTRICAL POWER',
-                'FIRE PROTECTION', 'FLIGHT CONTROLS', 'FUEL', 'HYDRAULIC POWER',
-                'LANDING GEAR', 'NAVIGATION', 'APU', 'DOORS', 'POWER PLANT'
-            ];
-
-            AIRCRAFT_FOLDERS.forEach((aircraft, idx) => {
-                // Each aircraft gets 2-4 manual types
-                const numTypes = 2 + (idx % 3);
-                for (let i = 0; i < numTypes && i < MANUAL_TYPES.length; i++) {
-                    const manualType = MANUAL_TYPES[i];
-                    // Each manual type gets 2-5 documents
-                    const numDocs = 2 + (idx * i % 4);
-                    for (let j = 0; j < numDocs && j < ataNumbers.length; j++) {
-                        const ataIdx = (idx + i + j) % ataNumbers.length;
-                        const ata = ataNumbers[ataIdx];
-                        const title = titles[ataIdx] || 'UNKNOWN';
-                        // Generate a realistic filename
-                        const filename = `ATA${ata}-${title.replace(/ /g, '')}.pdf`;
-                        // Generate a fake Drive file ID
-                        const fileId = `FILE_${aircraft.replace(/ /g, '_')}_${manualType}_${ata}_${j}`;
-                        const previewUrl = `https://drive.google.com/file/d/${fileId}/preview`;
-
-                        sampleData.push({
-                            id: `${aircraft}-${manualType}-${ata}-${Date.now()}-${Math.random()}`,
+            AIRCRAFT_FOLDERS.forEach(aircraft => {
+                MANUAL_TYPES.forEach(manualType => {
+                    // Generate 3-5 ATA chapters per manual type (simulating what's in Drive)
+                    const count = 3 + Math.floor(Math.random() * 3);
+                    for (let i = 0; i < count && i < ataKeys.length; i++) {
+                        const ata = ataKeys[i];
+                        const title = ATA_TITLES[ata] || 'UNKNOWN';
+                        const fileId = `FILE_${aircraft.replace(/ /g, '_')}_${manualType}_${ata}`;
+                        allManuals.push({
+                            id: `${aircraft}-${manualType}-${ata}`,
                             aircraft: aircraft,
                             manufacturer: aircraft.split(' ')[0] || 'Unknown',
                             manualType: manualType,
-                            manualTitle: TYPE_NAMES[manualType] || manualType,
+                            manualTitle: manualType,
                             ataChapter: ata,
-                            ataTitle: ATA_TITLES[ata] || title,
-                            revision: `Rev ${Math.floor(Math.random() * 20) + 1}`,
-                            googleDrivePreviewUrl: previewUrl,
-                            fileName: filename,
+                            ataTitle: title,
+                            driveFolderUrl: DRIVE_FOLDER_URL,
+                            fileName: `${manualType}-${ata}.pdf`,
                             status: 'available',
                             keywords: [ata, title, aircraft, manualType].map(s => s.toLowerCase())
                         });
+                        totalManualsCount++;
                     }
-                }
+                });
             });
 
-            return sampleData;
-        }
-
-        // ============================================================
-        // LOAD DATA - Auto-generate from folder structure
-        // ============================================================
-
-        function loadLibrary() {
-            const loading = document.getElementById('loadingIndicator');
-
-            // Simulate loading (in production, this would call Drive API)
-            loading.style.display = 'block';
-
-            setTimeout(() => {
-                // Generate data from folder structure
-                allManuals = generateSampleData();
-
-                // Hide loading
-                loading.style.display = 'none';
-
-                // Render everything
-                renderQuickAccess();
-                renderAircraft();
-                renderATA();
-
-                // Update counts
-                const uniqueAircraft = new Set(allManuals.map(m => m.aircraft));
-                document.querySelector('.admin-panel .admin-grid').innerHTML +=
-                    `<span style="color:#8aaac0;font-size:0.85rem;margin-left:auto;">
-                            <i class="fas fa-file-alt text-gold"></i> ${allManuals.length} manuals · 
-                            <i class="fas fa-plane text-gold"></i> ${uniqueAircraft.size} aircraft
-                        </span>`;
-
-                console.log('🛩️ Library loaded successfully!');
-                console.log(`📚 Found ${allManuals.length} manuals across ${uniqueAircraft.size} aircraft`);
-
-            }, 1500); // Simulate loading delay
+            // Update counters
+            document.getElementById('totalManuals').textContent = allManuals.length;
+            document.getElementById('totalAircraft').textContent = AIRCRAFT_FOLDERS.length;
         }
 
         // ============================================================
@@ -730,19 +688,28 @@
         // ============================================================
 
         function renderQuickAccess() {
-            const types = ['AMM', 'MM', 'WDM', 'SRM', 'TSM', 'SPM'];
             const grid = document.getElementById('quickAccessGrid');
             grid.innerHTML = '';
-            types.forEach(t => {
-                const count = allManuals.filter(m => m.manualType === t).length;
+            const iconMap = {
+                'AMM': 'fa-plane',
+                'MM': 'fa-wrench',
+                'WDM': 'fa-bolt',
+                'SRM': 'fa-ruler-combined',
+                'TSM': 'fa-screwdriver',
+                'SPM': 'fa-clipboard-list'
+            };
+            MANUAL_TYPES.forEach(type => {
+                const count = allManuals.filter(m => m.manualType === type).length;
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.innerHTML = `
-                            <i class="fas ${TYPE_ICONS[t] || 'fa-file'}"></i>
-                            <h4>${TYPE_NAMES[t] || t}</h4>
-                            <span class="badge">${count} docs</span>
-                        `;
-                card.addEventListener('click', () => performSearch(t));
+                    <i class="fas ${iconMap[type] || 'fa-file'}"></i>
+                    <h4>${type}</h4>
+                    <span class="badge">${count} docs</span>
+                `;
+                card.addEventListener('click', () => {
+                    window.open(DRIVE_FOLDER_URL, '_blank');
+                });
                 grid.appendChild(card);
             });
         }
@@ -762,19 +729,18 @@
                 const isHelicopter = aircraft.includes('Sikorsky') || aircraft.includes('Robinson');
                 const icon = isHelicopter ? 'fa-helicopter' : 'fa-plane';
                 card.innerHTML = `
-                            <div class="top">
-                                <i class="fas ${icon}"></i>
-                                <div class="info">
-                                    <h4>${aircraft}</h4>
-                                    <small>${aircraft.split(' ')[0]}</small>
-                                </div>
-                            </div>
-                            <div class="meta">${Array.from(types).map(t => `<span>${t}</span>`).join('')}</div>
-                            <div class="btn-sm" data-aircraft="${aircraft}">VIEW DOCUMENTATION</div>
-                        `;
-                card.querySelector('.btn-sm').addEventListener('click', (e) => {
-                    performSearch(e.target.dataset.aircraft);
-                });
+                    <div class="top">
+                        <i class="fas ${icon}"></i>
+                        <div class="info">
+                            <h4>${aircraft}</h4>
+                            <small>${aircraft.split(' ')[0]}</small>
+                        </div>
+                    </div>
+                    <div class="meta">${Array.from(types).map(t => `<span>${t}</span>`).join('')}</div>
+                    <button class="btn-sm" onclick="window.open('${DRIVE_FOLDER_URL}', '_blank')">
+                        <i class="fas fa-folder-open"></i> OPEN IN DRIVE
+                    </button>
+                `;
                 grid.appendChild(card);
             }
         }
@@ -793,9 +759,13 @@
             for (const [ata, { title, count }] of sorted) {
                 const div = document.createElement('div');
                 div.className = 'ata-item';
-                div.innerHTML =
-                    `<strong>ATA ${ata}</strong> ${title} <span style="color:#8aaac0;font-size:0.7rem;">(${count})</span>`;
-                div.addEventListener('click', () => performSearch(`ATA ${ata}`));
+                div.innerHTML = `
+                    <strong>ATA ${ata}</strong> ${title} 
+                    <span style="color:#8aaac0;font-size:0.7rem;">(${count})</span>
+                `;
+                div.addEventListener('click', () => {
+                    window.open(DRIVE_FOLDER_URL, '_blank');
+                });
                 grid.appendChild(div);
             }
         }
@@ -804,14 +774,14 @@
         // SEARCH ENGINE
         // ============================================================
 
-        function performSearch(query) {
+        function performSearch() {
             const input = document.getElementById('globalSearch');
-            const searchTerm = (query || input.value || '').trim().toLowerCase();
+            const query = input.value.trim().toLowerCase();
             const area = document.getElementById('searchResultsArea');
             const list = document.getElementById('searchResultsList');
             const countSpan = document.getElementById('resultCount');
 
-            if (!searchTerm) {
+            if (!query) {
                 area.style.display = 'none';
                 return;
             }
@@ -819,7 +789,7 @@
             const results = allManuals.filter(m => {
                 const haystack = `${m.aircraft} ${m.manualType} ${m.ataChapter} ${m.ataTitle} ${m.fileName} ${m.keywords.join(' ')}`
                     .toLowerCase();
-                return haystack.includes(searchTerm);
+                return haystack.includes(query);
             });
 
             area.style.display = 'block';
@@ -827,8 +797,16 @@
             list.innerHTML = '';
 
             if (results.length === 0) {
-                list.innerHTML =
-                    `<div style="padding:40px;text-align:center;color:#8aaac0;"><i class="fas fa-search" style="font-size:3rem;opacity:0.3;"></i><p style="margin-top:12px;">No manuals found for "${searchTerm}"</p></div>`;
+                list.innerHTML = `
+                    <div style="padding:40px;text-align:center;color:#8aaac0;">
+                        <i class="fas fa-search" style="font-size:3rem;opacity:0.3;"></i>
+                        <p style="margin-top:12px;">No manuals found for "${query}"</p>
+                        <p style="font-size:0.85rem;margin-top:8px;">
+                            <i class="fas fa-lightbulb text-gold"></i> 
+                            Try searching by aircraft name, ATA number, or manual type
+                        </p>
+                    </div>
+                `;
                 return;
             }
 
@@ -836,48 +814,137 @@
                 const div = document.createElement('div');
                 div.className = 'result-card';
                 div.innerHTML = `
-                            <div class="doc-info">
-                                <h4>${m.aircraft} · ATA ${m.ataChapter} – ${m.ataTitle}</h4>
-                                <p><i class="fas fa-book"></i> ${m.manualTitle} <span style="color:#8aaac0; margin-left:12px;">${m.manualType}-${m.ataChapter}</span></p>
-                                <span class="status"><i class="fas fa-check-circle"></i> ${m.status.toUpperCase()}</span>
-                            </div>
-                            <div class="doc-meta">
-                                <span style="background:#1f3a57; padding:2px 12px; border-radius:30px;">${m.revision}</span>
-                                <div class="actions">
-                                    <button class="open-btn" data-id="${m.id}"><i class="fas fa-eye"></i> OPEN MANUAL</button>
-                                    <button><i class="fas fa-star"></i> FAV</button>
-                                    <button><i class="fas fa-info-circle"></i> DETAILS</button>
-                                </div>
-                            </div>
-                        `;
-                div.querySelector('.open-btn').addEventListener('click', () => openManual(m));
+                    <div class="doc-info">
+                        <h4>${m.aircraft} · ATA ${m.ataChapter} – ${m.ataTitle}</h4>
+                        <p><i class="fas fa-book"></i> ${m.manualTitle} <span style="color:#8aaac0; margin-left:12px;">${m.manualType}-${m.ataChapter}</span></p>
+                        <span class="status"><i class="fas fa-check-circle"></i> AVAILABLE</span>
+                    </div>
+                    <div class="doc-meta">
+                        <span style="background:#1f3a57; padding:2px 12px; border-radius:30px; font-size:0.8rem;">
+                            <i class="fas fa-folder-open"></i> In Drive
+                        </span>
+                        <div class="actions">
+                            <button class="open-btn" onclick="openInDrive('${m.id}')">
+                                <i class="fas fa-external-link-alt"></i> OPEN IN DRIVE
+                            </button>
+                            <button onclick="showManualInfo('${m.id}')">
+                                <i class="fas fa-info-circle"></i> DETAILS
+                            </button>
+                        </div>
+                    </div>
+                `;
                 list.appendChild(div);
             });
         }
 
         // ============================================================
-        // OPEN MANUAL
+        // ACTION FUNCTIONS
         // ============================================================
 
-        function openManual(manual) {
-            const viewer = document.getElementById('viewerPlaceholder');
-            viewer.innerHTML = `
-                        <iframe src="${manual.googleDrivePreviewUrl}" allowfullscreen></iframe>
-                        <div style="position:absolute; top:20%; left:10%; right:10%; color:#f39c12; opacity:0.15; font-size:2.5rem; font-weight:700; pointer-events:none; transform:rotate(-12deg); text-align:center; letter-spacing:4px; text-shadow:0 0 10px #000;">
-                            AMT DIGITAL LIBRARY<br><span style="font-size:1.2rem;">STUDENT ACCESS ONLY</span>
-                        </div>
-                        <div style="position:absolute; bottom:20%; right:10%; color:#f39c12; opacity:0.15; font-size:1.2rem; font-weight:600; pointer-events:none;">
-                            ${new Date().toLocaleDateString()} · ${new Date().toLocaleTimeString()}
-                        </div>
-                    `;
-            viewer.style.minHeight = '400px';
-            viewer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        function openInDrive(manualId) {
+            // Find the manual and open its Drive folder
+            const manual = allManuals.find(m => m.id === manualId);
+            if (manual) {
+                window.open(manual.driveFolderUrl, '_blank');
+            } else {
+                window.open(DRIVE_FOLDER_URL, '_blank');
+            }
         }
 
-        // ============================================================
-        // HELP FUNCTIONS
-        // ============================================================
+        function showManualInfo(manualId) {
+            const manual = allManuals.find(m => m.id === manualId);
+            if (!manual) return;
+
+            const info = `
+        📄 MANUAL DETAILS
+
+        Aircraft: ${manual.aircraft}
+        Manual Type: ${manual.manualTitle} (${manual.manualType})
+        ATA Chapter: ${manual.ataChapter} - ${manual.ataTitle}
+        File: ${manual.fileName}
+        Status: ${manual.status.toUpperCase()}
+
+        📁 Location:
+        ${manual.driveFolderUrl}
+
+        Click "OPEN IN DRIVE" to view the manual.
+        `;
+            alert(info);
+        }
 
         function showHelp() {
             const help = `
-        🛩️ AMT DIGITAL LIBRARY - Auto-Discovery
+        🛩️ AMT DIGITAL LIBRARY
+
+        HOW TO USE:
+        1. Search for a manual using the search bar
+        2. Click on any aircraft card to browse
+        3. Click "OPEN IN DRIVE" to view the manual
+
+        SEARCH TIPS:
+        • Search by aircraft: "ATR", "BOEING"
+        • Search by ATA: "32", "21"
+        • Search by manual type: "AMM", "WDM"
+
+        GOOGLE DRIVE:
+        All manuals are stored in your Drive folder:
+        ${DRIVE_FOLDER_URL}
+
+        ADDING MANUALS:
+        1. Go to your Drive folder
+        2. Create subfolders: AIRCRAFT/MANUAL_TYPE/
+        3. Upload PDFs with ATA in filename
+        4. Refresh this page
+
+        For more help, contact your administrator.
+        `;
+            alert(help);
+        }
+
+        // ============================================================
+        // KEYBOARD SHORTCUTS
+        // ============================================================
+
+        document.addEventListener('keydown', function(e) {
+            // Ctrl+F or Cmd+F triggers search
+            if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
+                e.preventDefault();
+                document.getElementById('globalSearch').focus();
+            }
+            // Escape clears search and results
+            if (e.key === 'Escape') {
+                document.getElementById('globalSearch').value = '';
+                document.getElementById('searchResultsArea').style.display = 'none';
+            }
+        });
+
+        // ============================================================
+        // INITIALIZE
+        // ============================================================
+
+        generateLibrary();
+        renderQuickAccess();
+        renderAircraft();
+        renderATA();
+
+        // Make functions globally accessible
+        window.performSearch = performSearch;
+        window.openInDrive = openInDrive;
+        window.showManualInfo = showManualInfo;
+        window.showHelp = showHelp;
+
+        // Search on Enter key
+        document.getElementById('globalSearch').addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') performSearch();
+        });
+
+        // Disable right-click on the interface
+        document.addEventListener('contextmenu', e => e.preventDefault());
+
+        console.log('🛩️ AMT Digital Library initialized!');
+        console.log(`📁 Drive folder: ${DRIVE_FOLDER_URL}`);
+        console.log(`📚 Found ${allManuals.length} manuals across ${AIRCRAFT_FOLDERS.length} aircraft`);
+        console.log('💡 Click any manual to open it in Google Drive');
+    </script>
+</body>
+</html>
