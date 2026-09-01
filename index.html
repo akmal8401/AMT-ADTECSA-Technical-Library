@@ -553,7 +553,7 @@
             AIRCRAFT_FOLDERS.forEach(aircraft => {
                 const driveUrl = AIRCRAFT_DRIVE_LINKS[aircraft] || MAIN_DRIVE_URL;
                 MANUAL_TYPES.forEach(manualType => {
-                    // Generate 3-5 ATA chapters per manual type
+                    // Generate 3-5 ATA chapters per manual type (simulating what's in Drive)
                     const count = 3 + Math.floor(Math.random() * 3);
                     for (let i = 0; i < count && i < ataKeys.length; i++) {
                         const ata = ataKeys[i];
@@ -833,4 +833,8 @@
         document.addEventListener('contextmenu', e => e.preventDefault());
 
         console.log('🛩️ AMT Digital Library initialized!');
-        console.log
+        console.log(`📚 Found ${allManuals.length} manuals across ${AIRCRAFT_FOLDERS.length} aircraft`);
+        console.log('💡 Each aircraft has its own Drive folder.');
+    </script>
+</body>
+</html>
